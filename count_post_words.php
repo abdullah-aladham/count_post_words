@@ -1,20 +1,35 @@
 <?php
 /*
 Plugin Name: Count Post Words
-Description: A truley amazing plugin that counts words and alphabets and it supports arabic language
+Description: A truley amazing plugin that counts words and alphabets time needed to read of posts and it supports arabic language
 version:1.0
 Author:Abdullah A. Aladham
 Author URI:https://www.linkedin.com/in/abdullah-aladham/
 */
-
-add_filter('the_content','addToEndofPost');
-
-function addToEndofPost($content)
+class WordCountAndReadTimePlugin{
+function __construct ()
 {
-    if(is_single()&& is_main_query()){//checks if you are on a single screen for a post and it is only the main query (for the second term we check because the template may load or loop through other secondary posts )
-return $content . '<p> my name is abdullah</p>';
-    }
-    else{
-        retrun $content; //if the post wasnt accessed in permalink/single page and the query wasn't for it primarily just return the content
-    }
+    add_action( 'admin_menu', 'ourPluginSettingsLInk');
+
 }
+add_action( 'admin_menu', 'ourPluginSettingsLink');
+// add_action( 'admin_menu_Ar', 'Ar_ourPluginSettingsLInk');
+
+function SettingsLink()
+{
+  
+    add_options_page( 'Word Count Settings','Word Count', 'manage_options', 'word-count-settings-page-aa', 'AA_OurSettingsPageHTML' );
+
+    // add_options_page( 'AR_Word Count Settings','Arabic Word Count', 'Ar_manage_options', 'word-count-settings-page-arabic', 'AA_Ar_OurSettingsPageHTML' );
+
+}
+function AA_OurSettingsPageHTML()
+{?>
+Hello there 
+<?php   
+
+
+    
+}
+$wcartp=new WordCountAndReadTimePlugin();
+
